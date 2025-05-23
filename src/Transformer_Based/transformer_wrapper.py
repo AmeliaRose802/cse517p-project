@@ -16,8 +16,6 @@ class TransformerModelWrapper:
         """
         Load in trained model and vocab
         """
-
-        print(device)
         # The model's files will be saved and loaded from this directory
         self.work_directory = work_directory
 
@@ -45,7 +43,6 @@ class TransformerModelWrapper:
 
         self.index_to_char = np.array(list(self.index_to_char.values()), dtype=f'U{max_len}')
 
-        print(self.index_to_char)
         vocab_size = len(self.char_to_index)
         
         #load the model
@@ -74,23 +71,15 @@ class TransformerModelWrapper:
 
 
     def predict(self, input: list[str]):
-
-        start = time.perf_counter()
         input_tensor = self.embed_strings(input)
-
-        print(f"[predict] embed_strings time: {time.perf_counter() - start:.2f}s")
 
         space_token_id = self.char_to_index[' ']
 
 
         with torch.no_grad():
-            start = time.perf_counter()
             logits = self.model(input_tensor)
             logits[:, space_token_id] = float('-inf')
-            print(logits[0:2])
-            start = time.perf_counter()
             top3 = torch.topk(logits, k=3, dim=1).indices.cpu().tolist()
-            start = time.perf_counter()
             res = ["".join(self.index_to_char[j] for j in row) for row in top3]
             
         return res
@@ -142,52 +131,6 @@ class TransformerModelWrapper:
 
         torch.save(self.model.state_dict(), self.model_file_path)
         print(f"Model saved to character_transformer.pt")
-
-    # def train(self, data_directory, dataset_fraction: float = 1.0, num_epochs: int = 1, lr: float = 0.1, batch_size = 256):
-    #     dataset = CharDatasetWrapper(self.device, data_directory, self.context_length, dataset_fraction)
-        
-    #     # Write the vocab to a file
-    #     with open(self.vocab_file_path, "w", encoding="utf-8") as f:
-    #         json.dump(dataset.vocab(), f, ensure_ascii=False, indent=2)
-
-    #     num_workers = min(4, multiprocessing.cpu_count())
-    #     train_loader = DataLoader(dataset.train_dataset(), batch_size=batch_size, shuffle=True, num_workers=num_workers, pin_memory=True)
-
-    #     #self.model = torch.compile(CharacterTransformer(dataset.vocab_size()).to(self.device))\
-    #     self.model = CharacterTransformer(dataset.vocab_size()).to(self.device)
-    #     self.optimizer = torch.optim.AdamW(self.model.parameters(), lr)
-    #     self.loss_fn = torch.nn.CrossEntropyLoss()
-    #     scaler = GradScaler()
-
-    #     for epoch in range(num_epochs):
-    #         self.model.train()
-    #         total_train_loss = 0
-
-    #         for x_batch, y_batch in train_loader:
-    #             x_batch = x_batch.to(self.device, non_blocking=True)
-    #             y_batch = y_batch.to(self.device, non_blocking=True)
-                
-    #             self.optimizer.zero_grad()
-                
-    #             with autocast(device_type='cuda'):
-    #                 logits = self.model(x_batch)
-    #                 loss = self.loss_fn(logits, y_batch)
-
-    #             scaler.scale(loss).backward()
-    #             torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=1.0)
-    #             scaler.step(self.optimizer)
-    #             scaler.update()
-
-    #             total_train_loss += loss.item()
-
-    #         avg_train_loss = total_train_loss / len(train_loader)
-    #         print(f"Epoch {epoch+1}/{num_epochs} - Train Loss: {avg_train_loss:.4f}")
-
-    #         # Save model after each epoch
-    #         torch.save(self.model.state_dict(), f"{self.model_checkpoint_path}.{epoch}")
-
-    #     torch.save(self.model.state_dict(), self.model_file_path)
-    #     print(f"Model saved to character_transformer.pt")
 
     def eval_perplexity(self, dataloader: DataLoader):
         self.model.eval()
