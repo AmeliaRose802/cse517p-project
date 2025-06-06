@@ -12,7 +12,7 @@ import time
 
 def main():
     parser = argparse.ArgumentParser(description="Evaluate model accuracy by language")
-    parser.add_argument("--work_dir", type=str, default="./work", 
+    parser.add_argument("--work_dir", type=str, default="./model_experiments/exp_4_more_layers", 
                         help="Directory containing the model and vocabulary")
     parser.add_argument("--test_base_dir", type=str, default="./test", 
                         help="Base directory containing test data")

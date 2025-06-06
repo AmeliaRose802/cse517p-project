@@ -1,0 +1,8 @@
+{
+  "embedding_dim": 256,
+  "num_heads": 12,
+  "num_layers": 12,
+  "ff_dim": 1024,
+  "dropout": 0.2,
+  "desc": "large_model"
+}
