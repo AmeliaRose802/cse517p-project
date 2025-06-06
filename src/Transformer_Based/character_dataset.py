@@ -4,13 +4,6 @@ import pandas as pd
 
 from data_parsing.helpers import DatasetFileLoader
 
-# def build_vocab(text):
-#     unique_chars = sorted(set(text))
-#     unique_chars.remove('\n')
-#     char_to_index = {char: idx for idx, char in enumerate(unique_chars)}
-#     index_to_char = {idx: char for char, idx in char_to_index.items()}
-#     return char_to_index, index_to_char
-
 
 def build_vocab(text=None):
     """Create a vocabulary of printable lowercase English and Spanish characters."""
@@ -38,7 +31,6 @@ class CharDataset(Dataset):
         self.context_len = context_len
         self.data_indices = data 
 
-        print(self.data_indices)
     def __len__(self):
         return len(self.data_indices) - self.context_len
 

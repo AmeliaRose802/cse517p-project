@@ -202,7 +202,7 @@ class TransformerModelWrapper:
 
         return avg_dev_loss
     
-    def test_train(self, data_directory, model, continue_training: bool = True, dataset_fraction: float = 1.0, num_epochs: int = 3, lr: float = 1e-4, batch_size=1048):
+    def test_train(self, data_directory, model, continue_training: bool = True, dataset_fraction: float = 1.0, num_epochs: int = 3, lr: float = 1e-4, batch_size=1048, verbose = False):
 
         dataset = CharDatasetWrapper(self.device, data_directory, self.context_length, dataset_fraction)
         
@@ -217,14 +217,12 @@ class TransformerModelWrapper:
         train_loader = DataLoader(dataset.train_dataset(), batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers,  prefetch_factor=2, persistent_workers=True)
         dev_loader = DataLoader(dataset.dev_dataset(), batch_size=batch_size, shuffle=True, pin_memory=True, num_workers=num_workers,  prefetch_factor=2, persistent_workers=True)
 
-        original_model = None
-        
         self.model = model
             
         original_model = self.model
             
-        if hasattr(torch, 'compile'):
-            self.model = torch.compile(self.model)
+        # if hasattr(torch, 'compile'):
+        #     self.model = torch.compile(self.model)
         
         self.optimizer = torch.optim.AdamW(self.model.parameters(), lr=lr)
         self.loss_fn = torch.nn.CrossEntropyLoss()
@@ -271,9 +269,13 @@ class TransformerModelWrapper:
                 
             avg_train_loss = total_train_loss / len(train_loader)
 
-            dev_loss = self.eval_loss(dev_loader)
+            
 
-            print(f"[train] Epoch {epoch + 1}/{num_epochs} - Train Loss: {avg_train_loss:.4f}. Dev Loss: {dev_loss:.4f}")
+            print(f"[train] Epoch {epoch + 1}/{num_epochs} - Train Loss: {avg_train_loss:.4f}.")
+
+            if verbose:
+                dev_loss = self.eval_loss(dev_loader)
+                print(f"Dev loss: {dev_loss}")
 
             torch.save(self.model.state_dict(), f"{self.model_checkpoint_path}.{epoch}")
 
@@ -283,3 +285,8 @@ class TransformerModelWrapper:
         else:
             torch.save(self.model.state_dict(), self.model_file_path)
         print(f"[train] Model saved to {self.model_file_path}")
+
+        if not verbose:
+            dev_loss = self.eval_loss(dev_loader)
+
+        return dev_loss

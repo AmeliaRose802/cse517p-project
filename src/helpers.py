@@ -69,7 +69,6 @@ class DatasetFileLoader():
         self.train_data = pd.DataFrame()
 
         for file_name in files:
-            print(f"Reading file: {file_name}") 
             data = pd.read_csv(f"{data_directory}/{file_name}")["dialogue"]
 
             if "dev" in file_name:

@@ -25,36 +25,33 @@ if __name__ == '__main__':
     # Define hyperparameter combinations to test
     experiments = [
         # Baseline model
-        {"embedding_dim": 128, "num_heads": 8, "num_layers": 8, "ff_dim": 512, "dropout": 0.1, "desc": "baseline"},
+        # {"embedding_dim": 128, "num_heads": 8, "num_layers": 8, "ff_dim": 512, "dropout": 0.1, "desc": "baseline"},
         
-        # # Vary embedding dimensions
+        # # # Vary embedding dimensions
         # {"embedding_dim": 256, "num_heads": 8, "num_layers": 8, "ff_dim": 512, "dropout": 0.1, "desc": "larger_embedding"},
         
+        {"embedding_dim": 128, "num_heads": 4, "num_layers": 2, "ff_dim": 512, "dropout": 0.1, "desc": "current_model"},
+        {"embedding_dim": 32, "num_heads": 4, "num_layers": 2, "ff_dim": 512, "dropout": 0.1, "desc": "tiny_embeddings"},
+
         # # Vary transformer layers
-        # {"embedding_dim": 128, "num_heads": 8, "num_layers": 4, "ff_dim": 512, "dropout": 0.1, "desc": "fewer_layers"},
-        # {"embedding_dim": 128, "num_heads": 8, "num_layers": 12, "ff_dim": 512, "dropout": 0.1, "desc": "more_layers"},
+        {"embedding_dim": 128, "num_heads": 4, "num_layers": 4, "ff_dim": 512, "dropout": 0.1, "desc": "fewer_layers"},
+        {"embedding_dim": 128, "num_heads": 4, "num_layers": 12, "ff_dim": 512, "dropout": 0.1, "desc": "more_layers"},
         
-        # # Vary attention heads
-        # {"embedding_dim": 128, "num_heads": 4, "num_layers": 8, "ff_dim": 512, "dropout": 0.1, "desc": "fewer_heads"},
-        # {"embedding_dim": 128, "num_heads": 16, "num_layers": 8, "ff_dim": 512, "dropout": 0.1, "desc": "more_heads"},
+        # Vary attention heads+
+        {"embedding_dim": 128, "num_heads": 4, "num_layers": 2, "ff_dim": 512, "dropout": 0.1, "desc": "fewer_heads"},
+        {"embedding_dim": 128, "num_heads": 16, "num_layers": 2, "ff_dim": 512, "dropout": 0.1, "desc": "more_heads"},
         
-        # # Vary feedforward network
-        # {"embedding_dim": 128, "num_heads": 8, "num_layers": 8, "ff_dim": 256, "dropout": 0.1, "desc": "smaller_ffn"},
-        # {"embedding_dim": 128, "num_heads": 8, "num_layers": 8, "ff_dim": 1024, "dropout": 0.1, "desc": "larger_ffn"},
+        # Vary feedforward network
+        {"embedding_dim": 128, "num_heads": 4, "num_layers": 2, "ff_dim": 256, "dropout": 0.1, "desc": "smaller_ffn"},
+        {"embedding_dim": 128, "num_heads": 4, "num_layers": 2, "ff_dim": 1024, "dropout": 0.1, "desc": "larger_ffn"},
         
-        # # Vary dropout
-        # {"embedding_dim": 128, "num_heads": 8, "num_layers": 8, "ff_dim": 512, "dropout": 0.2, "desc": "higher_dropout"},
-        # {"embedding_dim": 128, "num_heads": 8, "num_layers": 8, "ff_dim": 512, "dropout": 0.3, "desc": "highest_dropout"},
+        # Vary dropout
+        {"embedding_dim": 128, "num_heads": 4, "num_layers": 2, "ff_dim": 512, "dropout": 0.2, "desc": "higher_dropout"},
+        {"embedding_dim": 128, "num_heads": 4, "num_layers": 2, "ff_dim": 512, "dropout": 0.3, "desc": "highest_dropout"},
         
-        # # Try MLP output layer
-        # {"embedding_dim": 128, "num_heads": 8, "num_layers": 8, "ff_dim": 512, "dropout": 0.1, "use_mlp": True, "desc": "mlp_output"},
-        
-        # # Try output pooling
-        # {"embedding_dim": 128, "num_heads": 8, "num_layers": 8, "ff_dim": 512, "dropout": 0.1, "pooling": "mean", "desc": "mean_pooling"},
-        
-        # # Small and large model combinations
-        # {"embedding_dim": 256, "num_heads": 12, "num_layers": 12, "ff_dim": 1024, "dropout": 0.2, "desc": "large_model"},
-        # {"embedding_dim": 64, "num_heads": 4, "num_layers": 4, "ff_dim": 256, "dropout": 0.1, "desc": "small_model"},
+        # Small and large model combinations
+        {"embedding_dim": 256, "num_heads": 12, "num_layers": 12, "ff_dim": 1024, "dropout": 0.2, "desc": "large_model"},
+        {"embedding_dim": 64, "num_heads": 4, "num_layers": 4, "ff_dim": 256, "dropout": 0.1, "desc": "small_model"},
     ]
 
     def run_experiment(params, experiment_id):
@@ -75,14 +72,8 @@ if __name__ == '__main__':
             print(f"\nTraining experiment {experiment_id}: {params['desc']}")
             start_time = time.time()
             
-            # Create dataset wrapper to get vocab size
-            print("About to make dataset")
-            print(f"Using data directory: {data_directory}")
-            
-            dataset_wrapper = CharDatasetWrapper(device, data_directory, wrapper.context_length, 0.2)
+            dataset_wrapper = CharDatasetWrapper(device, data_directory, wrapper.context_length, 0.01)
             vocab_size = dataset_wrapper.vocab_size()
-            
-            print("Successfully made dataset")
             
             # Create model with the specified parameters
             # Only use parameters that exist in the CharacterTransformer constructor
@@ -96,27 +87,12 @@ if __name__ == '__main__':
             ).to(device)
             
             # Train with test_train function
-            wrapper.test_train(
+            dev_loss = wrapper.test_train(
                 data_directory=data_directory,
                 model=model,  # Pass the model explicitly
-                continue_training=False,
-                dataset_fraction=0.001,
-                num_epochs=1,
-                batch_size=1048
-            )
+                dataset_fraction=.1,
+                num_epochs=2)
             
-            print("About to try to load the model")
-            # Load model and evaluate dev loss
-            #wrapper.load()
-
-            print("Loaded the model")
-            
-            # Create dataset and dataloader for evaluation
-            dev_dataset = dataset_wrapper.dev_dataset()
-            dev_loader = DataLoader(dev_dataset, batch_size=256)
-            
-            print("About to eval dev loss")
-            dev_loss = wrapper.eval_loss(dev_loader)
             training_time = time.time() - start_time
             
             # Count model parameters
@@ -138,6 +114,7 @@ if __name__ == '__main__':
         except Exception as e:
             print(f"Error in experiment {experiment_id}: {str(e)}")
             return None
+        
 
     # Run all experiments
     results = []
