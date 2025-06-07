@@ -52,9 +52,24 @@ class TransformerModelWrapper:
 
         vocab_size = len(self.char_to_index)
         
-        #load the model
-        self.model = CharacterTransformer(vocab_size).to(self.device)
-        self.model.load_state_dict(torch.load(self.model_file_path, map_location=self.device))
+        # Load the saved model state to inspect its architecture
+        saved_state = torch.load(self.model_file_path, map_location=self.device)
+        
+        # Try to infer model parameters from the saved state
+        model_params = self._infer_model_params_from_state(saved_state, vocab_size)
+        
+        # Create model with inferred parameters
+        self.model = CharacterTransformer(
+            vocab_size=vocab_size,
+            embedding_dim=model_params['embedding_dim'],
+            num_heads=model_params['num_heads'],
+            num_layers=model_params['num_layers'],
+            ff_dim=model_params['ff_dim'],
+            dropout=model_params['dropout']
+        ).to(self.device)
+        
+        # Load the state dict (should work perfectly now)
+        self.model.load_state_dict(saved_state)
 
         non_compiled_model = self.model
         
@@ -62,6 +77,70 @@ class TransformerModelWrapper:
             self.model = torch.compile(self.model)
 
         return non_compiled_model
+    
+    def _infer_model_params_from_state(self, state_dict, vocab_size):
+        """Infer model architecture parameters from saved state dict"""
+        
+        # Default parameters (fallback)
+        params = {
+            'embedding_dim': 128,
+            'num_heads': 4,
+            'num_layers': 2,
+            'ff_dim': 512,
+            'dropout': 0.1
+        }
+        
+        try:
+            # Infer embedding dimension from embedding layer
+            if 'embedding.weight' in state_dict:
+                embedding_shape = state_dict['embedding.weight'].shape
+                if len(embedding_shape) == 2 and embedding_shape[0] == vocab_size:
+                    params['embedding_dim'] = embedding_shape[1]
+            
+            # Infer number of layers by counting transformer encoder layers
+            layer_keys = [k for k in state_dict.keys() if k.startswith('transformer_encoder.layers.')]
+            if layer_keys:
+                layer_indices = []
+                for key in layer_keys:
+                    parts = key.split('.')
+                    if len(parts) >= 3 and parts[2].isdigit():
+                        layer_indices.append(int(parts[2]))
+                if layer_indices:
+                    params['num_layers'] = max(layer_indices) + 1
+            
+            # Infer feed-forward dimension from linear1 layer
+            linear1_key = 'transformer_encoder.layers.0.linear1.weight'
+            if linear1_key in state_dict:
+                linear1_shape = state_dict[linear1_key].shape
+                if len(linear1_shape) == 2:
+                    params['ff_dim'] = linear1_shape[0]
+            
+            # Infer number of heads from attention projection weights
+            in_proj_key = 'transformer_encoder.layers.0.self_attn.in_proj_weight'
+            if in_proj_key in state_dict:
+                in_proj_shape = state_dict[in_proj_key].shape
+                if len(in_proj_shape) == 2:
+                    # in_proj has shape (3 * num_heads * head_dim, embedding_dim)
+                    # where head_dim = embedding_dim / num_heads
+                    # So: 3 * num_heads * (embedding_dim / num_heads) = 3 * embedding_dim
+                    expected_size = 3 * params['embedding_dim']
+                    if in_proj_shape[0] == expected_size:
+                        # We can't directly infer num_heads from this, but we know it's consistent
+                        # Try common values: 4, 8, 16
+                        for num_heads in [4, 8, 16, 2, 1]:
+                            if params['embedding_dim'] % num_heads == 0:
+                                params['num_heads'] = num_heads
+                                break
+            
+            print(f"Inferred model parameters: embedding_dim={params['embedding_dim']}, "
+                  f"num_heads={params['num_heads']}, num_layers={params['num_layers']}, "
+                  f"ff_dim={params['ff_dim']}, dropout={params['dropout']}")
+                  
+        except Exception as e:
+            print(f"Warning: Could not fully infer model parameters: {e}")
+            print("Using default parameters as fallback")
+        
+        return params
        
     
     def embed_strings(self, inputs: list[str]):

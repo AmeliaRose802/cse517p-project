@@ -1,0 +1,494 @@
+Experiment Evaluation Results - Sat Jun  7 13:13:11 PDT 2025
+============================================
+
+Inferred model parameters: embedding_dim=128, num_heads=4, num_layers=8, ff_dim=512, dropout=0.1
+
+===== Evaluating Combined =====
+Generating predictions for Combined...
+Evaluating accuracy for Combined...
+Top-1 Accuracy: 38.56%
+Top-3 Accuracy: 65.34%
+Number of examples: 61865
+Time per prediction: 0.04 ms
+
+===== Evaluating english =====
+Generating predictions for english...
+Evaluating accuracy for english...
+Top-1 Accuracy: 38.61%
+Top-3 Accuracy: 65.64%
+Number of examples: 40292
+Time per prediction: 0.02 ms
+
+===== Evaluating spanish =====
+Generating predictions for spanish...
+Evaluating accuracy for spanish...
+Top-1 Accuracy: 36.00%
+Top-3 Accuracy: 60.80%
+Number of examples: 500
+Time per prediction: 0.02 ms
+
+===== SUMMARY =====
++------------+------------------+------------------+--------------+------------+-----------------+
+| Language   | Top-1 Accuracy   | Top-3 Accuracy   | Total Time   |   Examples | ms/prediction   |
++============+==================+==================+==============+============+=================+
+| Combined   | 38.56%           | 65.34%           | 2.28 sec     |      61865 | 0.04 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| english    | 38.61%           | 65.64%           | 0.76 sec     |      40292 | 0.02 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| spanish    | 36.00%           | 60.80%           | 0.01 sec     |        500 | 0.02 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+
+Inferred model parameters: embedding_dim=128, num_heads=4, num_layers=2, ff_dim=512, dropout=0.1
+
+===== Evaluating Combined =====
+Generating predictions for Combined...
+Evaluating accuracy for Combined...
+Top-1 Accuracy: 43.69%
+Top-3 Accuracy: 71.37%
+Number of examples: 61865
+Time per prediction: 0.02 ms
+
+===== Evaluating english =====
+Generating predictions for english...
+Evaluating accuracy for english...
+Top-1 Accuracy: 43.39%
+Top-3 Accuracy: 72.13%
+Number of examples: 40292
+Time per prediction: 0.01 ms
+
+===== Evaluating spanish =====
+Generating predictions for spanish...
+Evaluating accuracy for spanish...
+Top-1 Accuracy: 36.40%
+Top-3 Accuracy: 63.00%
+Number of examples: 500
+Time per prediction: 0.01 ms
+
+===== SUMMARY =====
++------------+------------------+------------------+--------------+------------+-----------------+
+| Language   | Top-1 Accuracy   | Top-3 Accuracy   | Total Time   |   Examples | ms/prediction   |
++============+==================+==================+==============+============+=================+
+| Combined   | 43.69%           | 71.37%           | 1.20 sec     |      61865 | 0.02 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| english    | 43.39%           | 72.13%           | 0.29 sec     |      40292 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| spanish    | 36.40%           | 63.00%           | 0.00 sec     |        500 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+
+SKIPPED: exp_1_more_layers - Directory not found
+
+Inferred model parameters: embedding_dim=256, num_heads=4, num_layers=8, ff_dim=512, dropout=0.1
+
+===== Evaluating Combined =====
+Generating predictions for Combined...
+Evaluating accuracy for Combined...
+Top-1 Accuracy: 33.86%
+Top-3 Accuracy: 62.62%
+Number of examples: 61865
+Time per prediction: 0.05 ms
+
+===== Evaluating english =====
+Generating predictions for english...
+Evaluating accuracy for english...
+Top-1 Accuracy: 34.79%
+Top-3 Accuracy: 62.92%
+Number of examples: 40292
+Time per prediction: 0.04 ms
+
+===== Evaluating spanish =====
+Generating predictions for spanish...
+Evaluating accuracy for spanish...
+Top-1 Accuracy: 33.60%
+Top-3 Accuracy: 62.60%
+Number of examples: 500
+Time per prediction: 0.03 ms
+
+===== SUMMARY =====
++------------+------------------+------------------+--------------+------------+-----------------+
+| Language   | Top-1 Accuracy   | Top-3 Accuracy   | Total Time   |   Examples | ms/prediction   |
++============+==================+==================+==============+============+=================+
+| Combined   | 33.86%           | 62.62%           | 3.23 sec     |      61865 | 0.05 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| english    | 34.79%           | 62.92%           | 1.54 sec     |      40292 | 0.04 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| spanish    | 33.60%           | 62.60%           | 0.02 sec     |        500 | 0.03 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+
+Inferred model parameters: embedding_dim=32, num_heads=4, num_layers=2, ff_dim=512, dropout=0.1
+
+===== Evaluating Combined =====
+Generating predictions for Combined...
+Evaluating accuracy for Combined...
+Top-1 Accuracy: 35.18%
+Top-3 Accuracy: 60.17%
+Number of examples: 61865
+Time per prediction: 0.02 ms
+
+===== Evaluating english =====
+Generating predictions for english...
+Evaluating accuracy for english...
+Top-1 Accuracy: 36.29%
+Top-3 Accuracy: 61.00%
+Number of examples: 40292
+Time per prediction: 0.01 ms
+
+===== Evaluating spanish =====
+Generating predictions for spanish...
+Evaluating accuracy for spanish...
+Top-1 Accuracy: 28.40%
+Top-3 Accuracy: 56.60%
+Number of examples: 500
+Time per prediction: 0.01 ms
+
+===== SUMMARY =====
++------------+------------------+------------------+--------------+------------+-----------------+
+| Language   | Top-1 Accuracy   | Top-3 Accuracy   | Total Time   |   Examples | ms/prediction   |
++============+==================+==================+==============+============+=================+
+| Combined   | 35.18%           | 60.17%           | 1.15 sec     |      61865 | 0.02 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| english    | 36.29%           | 61.00%           | 0.23 sec     |      40292 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| spanish    | 28.40%           | 56.60%           | 0.01 sec     |        500 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+
+Inferred model parameters: embedding_dim=128, num_heads=4, num_layers=4, ff_dim=512, dropout=0.1
+
+===== Evaluating Combined =====
+Generating predictions for Combined...
+Evaluating accuracy for Combined...
+Top-1 Accuracy: 49.07%
+Top-3 Accuracy: 74.97%
+Number of examples: 61865
+Time per prediction: 0.03 ms
+
+===== Evaluating english =====
+Generating predictions for english...
+Evaluating accuracy for english...
+Top-1 Accuracy: 48.63%
+Top-3 Accuracy: 75.69%
+Number of examples: 40292
+Time per prediction: 0.01 ms
+
+===== Evaluating spanish =====
+Generating predictions for spanish...
+Evaluating accuracy for spanish...
+Top-1 Accuracy: 37.40%
+Top-3 Accuracy: 65.00%
+Number of examples: 500
+Time per prediction: 0.02 ms
+
+===== SUMMARY =====
++------------+------------------+------------------+--------------+------------+-----------------+
+| Language   | Top-1 Accuracy   | Top-3 Accuracy   | Total Time   |   Examples | ms/prediction   |
++============+==================+==================+==============+============+=================+
+| Combined   | 49.07%           | 74.97%           | 1.56 sec     |      61865 | 0.03 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| english    | 48.63%           | 75.69%           | 0.41 sec     |      40292 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| spanish    | 37.40%           | 65.00%           | 0.01 sec     |        500 | 0.02 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+
+Inferred model parameters: embedding_dim=128, num_heads=4, num_layers=12, ff_dim=512, dropout=0.1
+
+===== Evaluating Combined =====
+Generating predictions for Combined...
+Evaluating accuracy for Combined...
+Top-1 Accuracy: 52.93%
+Top-3 Accuracy: 77.10%
+Number of examples: 61865
+Time per prediction: 0.05 ms
+
+===== Evaluating english =====
+Generating predictions for english...
+Evaluating accuracy for english...
+Top-1 Accuracy: 52.82%
+Top-3 Accuracy: 77.98%
+Number of examples: 40292
+Time per prediction: 0.03 ms
+
+===== Evaluating spanish =====
+Generating predictions for spanish...
+Evaluating accuracy for spanish...
+Top-1 Accuracy: 40.60%
+Top-3 Accuracy: 68.00%
+Number of examples: 500
+Time per prediction: 0.03 ms
+
+===== SUMMARY =====
++------------+------------------+------------------+--------------+------------+-----------------+
+| Language   | Top-1 Accuracy   | Top-3 Accuracy   | Total Time   |   Examples | ms/prediction   |
++============+==================+==================+==============+============+=================+
+| Combined   | 52.93%           | 77.10%           | 3.21 sec     |      61865 | 0.05 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| english    | 52.82%           | 77.98%           | 1.28 sec     |      40292 | 0.03 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| spanish    | 40.60%           | 68.00%           | 0.01 sec     |        500 | 0.03 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+
+Inferred model parameters: embedding_dim=128, num_heads=4, num_layers=2, ff_dim=512, dropout=0.1
+
+===== Evaluating Combined =====
+Generating predictions for Combined...
+Evaluating accuracy for Combined...
+Top-1 Accuracy: 45.40%
+Top-3 Accuracy: 71.54%
+Number of examples: 61865
+Time per prediction: 0.02 ms
+
+===== Evaluating english =====
+Generating predictions for english...
+Evaluating accuracy for english...
+Top-1 Accuracy: 45.02%
+Top-3 Accuracy: 71.89%
+Number of examples: 40292
+Time per prediction: 0.01 ms
+
+===== Evaluating spanish =====
+Generating predictions for spanish...
+Evaluating accuracy for spanish...
+Top-1 Accuracy: 34.00%
+Top-3 Accuracy: 64.80%
+Number of examples: 500
+Time per prediction: 0.01 ms
+
+===== SUMMARY =====
++------------+------------------+------------------+--------------+------------+-----------------+
+| Language   | Top-1 Accuracy   | Top-3 Accuracy   | Total Time   |   Examples | ms/prediction   |
++============+==================+==================+==============+============+=================+
+| Combined   | 45.40%           | 71.54%           | 1.25 sec     |      61865 | 0.02 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| english    | 45.02%           | 71.89%           | 0.29 sec     |      40292 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| spanish    | 34.00%           | 64.80%           | 0.01 sec     |        500 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+
+Inferred model parameters: embedding_dim=128, num_heads=4, num_layers=2, ff_dim=512, dropout=0.1
+
+===== Evaluating Combined =====
+Generating predictions for Combined...
+Evaluating accuracy for Combined...
+Top-1 Accuracy: 30.45%
+Top-3 Accuracy: 54.61%
+Number of examples: 61865
+Time per prediction: 0.02 ms
+
+===== Evaluating english =====
+Generating predictions for english...
+Evaluating accuracy for english...
+Top-1 Accuracy: 30.30%
+Top-3 Accuracy: 54.94%
+Number of examples: 40292
+Time per prediction: 0.01 ms
+
+===== Evaluating spanish =====
+Generating predictions for spanish...
+Evaluating accuracy for spanish...
+Top-1 Accuracy: 30.00%
+Top-3 Accuracy: 58.20%
+Number of examples: 500
+Time per prediction: 0.01 ms
+
+===== SUMMARY =====
++------------+------------------+------------------+--------------+------------+-----------------+
+| Language   | Top-1 Accuracy   | Top-3 Accuracy   | Total Time   |   Examples | ms/prediction   |
++============+==================+==================+==============+============+=================+
+| Combined   | 30.45%           | 54.61%           | 1.20 sec     |      61865 | 0.02 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| english    | 30.30%           | 54.94%           | 0.27 sec     |      40292 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| spanish    | 30.00%           | 58.20%           | 0.00 sec     |        500 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+
+Inferred model parameters: embedding_dim=128, num_heads=4, num_layers=2, ff_dim=256, dropout=0.1
+
+===== Evaluating Combined =====
+Generating predictions for Combined...
+Evaluating accuracy for Combined...
+Top-1 Accuracy: 44.21%
+Top-3 Accuracy: 70.39%
+Number of examples: 61865
+Time per prediction: 0.02 ms
+
+===== Evaluating english =====
+Generating predictions for english...
+Evaluating accuracy for english...
+Top-1 Accuracy: 43.67%
+Top-3 Accuracy: 70.79%
+Number of examples: 40292
+Time per prediction: 0.01 ms
+
+===== Evaluating spanish =====
+Generating predictions for spanish...
+Evaluating accuracy for spanish...
+Top-1 Accuracy: 37.00%
+Top-3 Accuracy: 62.80%
+Number of examples: 500
+Time per prediction: 0.01 ms
+
+===== SUMMARY =====
++------------+------------------+------------------+--------------+------------+-----------------+
+| Language   | Top-1 Accuracy   | Top-3 Accuracy   | Total Time   |   Examples | ms/prediction   |
++============+==================+==================+==============+============+=================+
+| Combined   | 44.21%           | 70.39%           | 1.20 sec     |      61865 | 0.02 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| english    | 43.67%           | 70.79%           | 0.25 sec     |      40292 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| spanish    | 37.00%           | 62.80%           | 0.00 sec     |        500 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+
+Inferred model parameters: embedding_dim=128, num_heads=4, num_layers=2, ff_dim=1024, dropout=0.1
+
+===== Evaluating Combined =====
+Generating predictions for Combined...
+Evaluating accuracy for Combined...
+Top-1 Accuracy: 47.82%
+Top-3 Accuracy: 73.99%
+Number of examples: 61865
+Time per prediction: 0.03 ms
+
+===== Evaluating english =====
+Generating predictions for english...
+Evaluating accuracy for english...
+Top-1 Accuracy: 47.66%
+Top-3 Accuracy: 74.46%
+Number of examples: 40292
+Time per prediction: 0.01 ms
+
+===== Evaluating spanish =====
+Generating predictions for spanish...
+Evaluating accuracy for spanish...
+Top-1 Accuracy: 38.00%
+Top-3 Accuracy: 63.60%
+Number of examples: 500
+Time per prediction: 0.01 ms
+
+===== SUMMARY =====
++------------+------------------+------------------+--------------+------------+-----------------+
+| Language   | Top-1 Accuracy   | Top-3 Accuracy   | Total Time   |   Examples | ms/prediction   |
++============+==================+==================+==============+============+=================+
+| Combined   | 47.82%           | 73.99%           | 1.76 sec     |      61865 | 0.03 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| english    | 47.66%           | 74.46%           | 0.31 sec     |      40292 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| spanish    | 38.00%           | 63.60%           | 0.00 sec     |        500 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+
+Inferred model parameters: embedding_dim=128, num_heads=4, num_layers=2, ff_dim=512, dropout=0.1
+
+===== Evaluating Combined =====
+Generating predictions for Combined...
+Evaluating accuracy for Combined...
+Top-1 Accuracy: 42.90%
+Top-3 Accuracy: 70.08%
+Number of examples: 61865
+Time per prediction: 0.02 ms
+
+===== Evaluating english =====
+Generating predictions for english...
+Evaluating accuracy for english...
+Top-1 Accuracy: 42.76%
+Top-3 Accuracy: 70.29%
+Number of examples: 40292
+Time per prediction: 0.01 ms
+
+===== Evaluating spanish =====
+Generating predictions for spanish...
+Evaluating accuracy for spanish...
+Top-1 Accuracy: 34.60%
+Top-3 Accuracy: 62.00%
+Number of examples: 500
+Time per prediction: 0.01 ms
+
+===== SUMMARY =====
++------------+------------------+------------------+--------------+------------+-----------------+
+| Language   | Top-1 Accuracy   | Top-3 Accuracy   | Total Time   |   Examples | ms/prediction   |
++============+==================+==================+==============+============+=================+
+| Combined   | 42.90%           | 70.08%           | 1.27 sec     |      61865 | 0.02 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| english    | 42.76%           | 70.29%           | 0.31 sec     |      40292 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| spanish    | 34.60%           | 62.00%           | 0.01 sec     |        500 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+
+Inferred model parameters: embedding_dim=128, num_heads=4, num_layers=2, ff_dim=512, dropout=0.1
+
+===== Evaluating Combined =====
+Generating predictions for Combined...
+Evaluating accuracy for Combined...
+Top-1 Accuracy: 41.97%
+Top-3 Accuracy: 69.49%
+Number of examples: 61865
+Time per prediction: 0.02 ms
+
+===== Evaluating english =====
+Generating predictions for english...
+Evaluating accuracy for english...
+Top-1 Accuracy: 41.36%
+Top-3 Accuracy: 69.92%
+Number of examples: 40292
+Time per prediction: 0.01 ms
+
+===== Evaluating spanish =====
+Generating predictions for spanish...
+Evaluating accuracy for spanish...
+Top-1 Accuracy: 31.80%
+Top-3 Accuracy: 60.20%
+Number of examples: 500
+Time per prediction: 0.01 ms
+
+===== SUMMARY =====
++------------+------------------+------------------+--------------+------------+-----------------+
+| Language   | Top-1 Accuracy   | Top-3 Accuracy   | Total Time   |   Examples | ms/prediction   |
++============+==================+==================+==============+============+=================+
+| Combined   | 41.97%           | 69.49%           | 1.28 sec     |      61865 | 0.02 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| english    | 41.36%           | 69.92%           | 0.31 sec     |      40292 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| spanish    | 31.80%           | 60.20%           | 0.01 sec     |        500 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+
+Inferred model parameters: embedding_dim=64, num_heads=4, num_layers=4, ff_dim=256, dropout=0.1
+
+===== Evaluating Combined =====
+Generating predictions for Combined...
+Evaluating accuracy for Combined...
+Top-1 Accuracy: 41.34%
+Top-3 Accuracy: 67.12%
+Number of examples: 61865
+Time per prediction: 0.05 ms
+
+===== Evaluating english =====
+Generating predictions for english...
+Evaluating accuracy for english...
+Top-1 Accuracy: 40.75%
+Top-3 Accuracy: 67.45%
+Number of examples: 40292
+Time per prediction: 0.01 ms
+
+===== Evaluating spanish =====
+Generating predictions for spanish...
+Evaluating accuracy for spanish...
+Top-1 Accuracy: 33.20%
+Top-3 Accuracy: 60.60%
+Number of examples: 500
+Time per prediction: 0.01 ms
+
+===== SUMMARY =====
++------------+------------------+------------------+--------------+------------+-----------------+
+| Language   | Top-1 Accuracy   | Top-3 Accuracy   | Total Time   |   Examples | ms/prediction   |
++============+==================+==================+==============+============+=================+
+| Combined   | 41.34%           | 67.12%           | 2.87 sec     |      61865 | 0.05 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| english    | 40.75%           | 67.45%           | 0.47 sec     |      40292 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+| spanish    | 33.20%           | 60.60%           | 0.01 sec     |        500 | 0.01 ms         |
++------------+------------------+------------------+--------------+------------+-----------------+
+
+
+========================================== 
+SUMMARY
+==========================================
+Total experiments: 14
+Successful: 13
+Failed: 0
+Completed at: Sat Jun  7 13:14:49 PDT 2025
