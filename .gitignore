@@ -4,7 +4,9 @@ output/
 submit/
 submit.zip
 .venv/
-work
 /data/parsed_data
-/test
+test
 /work_models
+test/input.txt
+test/input.txt
+test/pred.txt
