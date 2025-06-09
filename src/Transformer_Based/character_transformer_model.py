@@ -16,7 +16,7 @@ class PositionEncoding(nn.Module):
         return x + self.pe[:, :x.size(1), :]
 
 class CharacterTransformer(nn.Module):
-    def __init__(self, vocab_size, embedding_dim=128, num_heads=4, num_layers=4, ff_dim=512, dropout=0.1):
+    def __init__(self, vocab_size, embedding_dim=128, num_heads=4, num_layers=12, ff_dim=1024, dropout=0.1):
         super().__init__()
         
         self.embedding = nn.Embedding(vocab_size, embedding_dim)

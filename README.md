@@ -8,10 +8,40 @@ For illustration purposes, this repo contains a dummy program that simply genera
 
 Run these commands only from the root of the repo
 
+### To setup and pull data
+
+Download datasets for all languages:
+
+```sh
+python ./src/data_parsing/prepare_multilingual_dataset.py
+```
+
+Set up test data folders:
+
+```sh
+python src/data_parsing/prepare_test_data.py --data_directory data/parsed_data --test_data cse517p-project/test
+```
+
+Add new vocab files (only needed when adding a new character type)
+
+```sh
+python src/data_parsing/parse_vocab_by_script.py --threshold 99
+```
+
 ### To train
 
 ```sh
-python ./src/train.py --work_dir ./work --data_dir ./data/parsed_data --data_fraction 1
+# Train on all character sets
+python ./src/train.py --work_dir ./work --data_dir ./data/parsed_data --data_fraction 1 --time --charset "all"
+
+# Train on a specific character set
+python ./src/train.py --work_dir ./work --data_dir ./data/parsed_data --charset "latin"
+
+# Train on multiple character sets
+python ./src/train.py --work_dir ./work --data_dir ./data/parsed_data --charset "latin,devanagari"
+
+# Include English data with another script
+python ./src/train.py --work_dir ./work --data_dir ./data/parsed_data --charset "devanagari,english"
 ```
 
 ### To Predict

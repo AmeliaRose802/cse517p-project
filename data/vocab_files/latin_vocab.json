@@ -1,0 +1,209 @@
+{
+  "script_group": "latin",
+  "languages": {
+    "tl": {
+      "language_code": "tl",
+      "unique_characters": 399,
+      "file_count": 3
+    },
+    "de": {
+      "language_code": "de",
+      "unique_characters": 214,
+      "file_count": 3
+    },
+    "es": {
+      "language_code": "es",
+      "unique_characters": 253,
+      "file_count": 3
+    },
+    "pt": {
+      "language_code": "pt",
+      "unique_characters": 204,
+      "file_count": 3
+    },
+    "ms": {
+      "language_code": "ms",
+      "unique_characters": 265,
+      "file_count": 3
+    },
+    "uz": {
+      "language_code": "uz",
+      "unique_characters": 217,
+      "file_count": 3
+    },
+    "id": {
+      "language_code": "id",
+      "unique_characters": 113,
+      "file_count": 3
+    },
+    "hu": {
+      "language_code": "hu",
+      "unique_characters": 192,
+      "file_count": 3
+    },
+    "nasa": {
+      "language_code": "nasa",
+      "unique_characters": 0,
+      "file_count": 3
+    },
+    "no": {
+      "language_code": "no",
+      "unique_characters": 213,
+      "file_count": 3
+    },
+    "trek": {
+      "language_code": "trek",
+      "unique_characters": 0,
+      "file_count": 3
+    },
+    "it": {
+      "language_code": "it",
+      "unique_characters": 166,
+      "file_count": 3
+    },
+    "ro": {
+      "language_code": "ro",
+      "unique_characters": 188,
+      "file_count": 3
+    },
+    "pl": {
+      "language_code": "pl",
+      "unique_characters": 248,
+      "file_count": 3
+    },
+    "sv": {
+      "language_code": "sv",
+      "unique_characters": 245,
+      "file_count": 3
+    },
+    "ca": {
+      "language_code": "ca",
+      "unique_characters": 179,
+      "file_count": 3
+    },
+    "et": {
+      "language_code": "et",
+      "unique_characters": 216,
+      "file_count": 3
+    },
+    "en": {
+      "language_code": "en",
+      "unique_characters": 263,
+      "file_count": 3
+    },
+    "cs": {
+      "language_code": "cs",
+      "unique_characters": 198,
+      "file_count": 3
+    },
+    "da": {
+      "language_code": "da",
+      "unique_characters": 180,
+      "file_count": 3
+    },
+    "fi": {
+      "language_code": "fi",
+      "unique_characters": 231,
+      "file_count": 3
+    },
+    "fr": {
+      "language_code": "fr",
+      "unique_characters": 257,
+      "file_count": 3
+    },
+    "tr": {
+      "language_code": "tr",
+      "unique_characters": 167,
+      "file_count": 3
+    },
+    "nl": {
+      "language_code": "nl",
+      "unique_characters": 253,
+      "file_count": 3
+    },
+    "vi": {
+      "language_code": "vi",
+      "unique_characters": 320,
+      "file_count": 3
+    },
+    "sw": {
+      "language_code": "sw",
+      "unique_characters": 171,
+      "file_count": 3
+    }
+  },
+  "unique_characters_total": 1512,
+  "vocabulary_size": 68,
+  "vocabulary_percentage": 4.497354497354497,
+  "coverage": 0.9901032029611005,
+  "vocabulary": [
+    "a",
+    "e",
+    "i",
+    "n",
+    "t",
+    "r",
+    "s",
+    "o",
+    "l",
+    "d",
+    "u",
+    "m",
+    "k",
+    "g",
+    "h",
+    "p",
+    "c",
+    "b",
+    "v",
+    "y",
+    "f",
+    "z",
+    "j",
+    "w",
+    "0",
+    "1",
+    "2",
+    "ä",
+    "é",
+    "q",
+    "á",
+    "ı",
+    "å",
+    "ö",
+    "ü",
+    "í",
+    "x",
+    "ó",
+    "3",
+    "5",
+    "9",
+    "4",
+    "à",
+    "8",
+    "7",
+    "6",
+    "ş",
+    "đ",
+    "ç",
+    "ă",
+    "ʻ",
+    "ø",
+    "ğ",
+    "ư",
+    "ł",
+    "ě",
+    "õ",
+    "–",
+    "æ",
+    "ê",
+    "ř",
+    "ú",
+    "â",
+    "ę",
+    "č",
+    "ý",
+    "ą",
+    "ã"
+  ]
+}
