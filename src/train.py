@@ -28,7 +28,7 @@ if __name__ == '__main__':
     if "," in charset_input:
         charsets = [cs.strip() for cs in charset_input.split(",")]
     
-    model = TransformerModelWrapper(device, args.work_dir, use_existing_vocab=False, character_set="all")
+    model = TransformerModelWrapper(device, args.work_dir, use_existing_vocab=True, character_set="all")
 
     dataset = CharDatasetWrapper(model.vocab, args.data_dir, model.context_length, float(args.data_fraction), charsets)
 

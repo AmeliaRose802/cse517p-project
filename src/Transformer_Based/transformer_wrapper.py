@@ -103,7 +103,7 @@ class TransformerModelWrapper:
         
         return res
     
-    def train(self, dataset, num_epochs: int = 3, lr: float = 1e-4, batch_size=49152, verbose=True, save_checkpoints=True, 
+    def train(self, dataset, num_epochs: int = 3, lr: float = 1e-4, batch_size=24576, verbose=True, save_checkpoints=True, 
               use_bf16=True, gradient_accumulation_steps=1):
         """
         Train the model on the given dataset.
@@ -127,8 +127,7 @@ class TransformerModelWrapper:
             os.makedirs(os.path.join(self.work_directory, "checkpoints"), exist_ok=True)
             self.model_checkpoint_path = f"{self.work_directory}/checkpoints/{self.model_file_name}"
 
-        # Prepare datasets with optimized settings for H200
-        num_workers = min(128, multiprocessing.cpu_count())  # Increased for H200
+        num_workers = min(16, multiprocessing.cpu_count()) 
         persistent_workers = num_workers > 0
         
         train_loader = DataLoader(
