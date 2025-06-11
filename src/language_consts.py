@@ -217,7 +217,7 @@ LANGUAGES = {
         "name": "Arabic",
         "script": "arabic",
         "language-family": "semitic",
-        "line-multiplier": 1
+        "line-multiplier": 2
     },
     "fa": {
         "code": "fa",
@@ -268,7 +268,7 @@ LANGUAGES = {
         "name": "Yiddish",
         "script": "hebrew",
         "language-family": "germanic",
-        "line-multiplier": 1
+        "line-multiplier": 2
     },
     
     # Greek script
@@ -286,7 +286,7 @@ LANGUAGES = {
         "name": "Thai",
         "script": "thai",
         "language-family": "tai-kadai",
-        "line-multiplier": 1.2
+        "line-multiplier": 2
     },
     
     # Other Latin script languages
