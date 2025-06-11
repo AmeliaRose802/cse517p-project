@@ -1,18 +1,71 @@
 import os
+import time
+import mmap
+import numpy as np
 import pandas as pd
+import pickle
 
-def load_test_input(input_file):
-    with open(input_file, encoding='utf-8') as f:
-        loaded = []
-        for line in f:
-            line = line[:-1].lower()
-            loaded.append(line)
-        return loaded
+# Cache for loaded test data
+_test_data_cache = {}
 
-def write_pred(preds, fname):
-    with open(fname, 'wt') as f:
-        for p in preds:
-            f.write('{}\n'.format(p))
+def load_test_input(test_data_file, use_cache=True, use_mmap=True, num_workers=1):
+    """Optimized test data loading for Docker environments"""
+    start_time = time.time()
+    
+    # Check for preprocessed binary version first (fastest)
+    binary_cache_path = f"{test_data_file}.bin"
+    if use_cache and os.path.exists(binary_cache_path):
+        print(f"Loading pre-processed binary data from {binary_cache_path}")
+        with open(binary_cache_path, 'rb') as f:
+            data = pickle.load(f)
+            load_time = time.time() - start_time
+            print(f"Loaded {len(data)} examples from binary cache in {load_time:.2f}s")
+            return data
+    
+    # Use optimized file reading based on file size
+    file_size = os.path.getsize(test_data_file)
+    print(f"Loading test data from {test_data_file} ({file_size/1024/1024:.2f} MB)")
+    
+    if use_mmap and file_size > 1024 * 1024:  # >1MB use mmap
+        try:
+            # Memory-mapped reading - much faster for large files
+            with open(test_data_file, 'r', encoding='utf-8') as f:
+                with mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ) as mm:
+                    # Bulk read is faster than line-by-line
+                    content = mm.read().decode('utf-8')
+                    lines = content.splitlines()
+        except Exception as e:
+            print(f"Memory mapping failed ({e}), falling back to buffered reading")
+            # Fallback to large buffer reading
+            with open(test_data_file, 'r', encoding='utf-8', buffering=16*1024*1024) as f:
+                lines = f.read().splitlines()
+    else:
+        # For smaller files, use buffered reading
+        with open(test_data_file, 'r', encoding='utf-8', buffering=8*1024*1024) as f:
+            lines = f.read().splitlines()
+    
+    # Optionally save binary version for future use
+    if use_cache:
+        try:
+            with open(binary_cache_path, 'wb') as f:
+                pickle.dump(lines, f, protocol=pickle.HIGHEST_PROTOCOL)
+            print(f"Saved binary cache to {binary_cache_path} for faster future loading")
+        except Exception as e:
+            print(f"Failed to save binary cache: {e}")
+    
+    load_time = time.time() - start_time
+    print(f"Loaded {len(lines)} examples in {load_time:.2f}s ({len(lines)/load_time:.1f} examples/s)")
+    return lines
+
+def write_pred(preds, output_file):
+    """Optimized prediction writing"""
+    start_time = time.time()
+    with open(output_file, 'w', encoding='utf-8', buffering=16*1024*1024) as f:
+        # Writing as a single joined string is faster than line-by-line
+        f.write('\n'.join(preds))
+    
+    write_time = time.time() - start_time
+    print(f"Wrote {len(preds)} predictions to {output_file} in {write_time:.2f}s")
 
 def get_top1_accuracy(gold, pred):
     """

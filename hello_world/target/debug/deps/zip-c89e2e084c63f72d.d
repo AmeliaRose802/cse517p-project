@@ -1,0 +1,14 @@
+/home/ameli/cse517p-project/hello_world/target/debug/deps/libzip-c89e2e084c63f72d.rmeta: /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/lib.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/compression.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/cp437.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/crc32.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/read.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/result.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/spec.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/types.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/write.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/zipcrypto.rs
+
+/home/ameli/cse517p-project/hello_world/target/debug/deps/zip-c89e2e084c63f72d.d: /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/lib.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/compression.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/cp437.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/crc32.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/read.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/result.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/spec.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/types.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/write.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/zipcrypto.rs
+
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/lib.rs:
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/compression.rs:
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/cp437.rs:
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/crc32.rs:
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/read.rs:
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/result.rs:
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/spec.rs:
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/types.rs:
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/write.rs:
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/zip-0.5.13/src/zipcrypto.rs:

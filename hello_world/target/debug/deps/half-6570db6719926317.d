@@ -1,0 +1,12 @@
+/home/ameli/cse517p-project/hello_world/target/debug/deps/libhalf-6570db6719926317.rmeta: /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/lib.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/bfloat.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/bfloat/convert.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/binary16.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/binary16/convert.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/slice.rs
+
+/home/ameli/cse517p-project/hello_world/target/debug/deps/libhalf-6570db6719926317.rlib: /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/lib.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/bfloat.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/bfloat/convert.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/binary16.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/binary16/convert.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/slice.rs
+
+/home/ameli/cse517p-project/hello_world/target/debug/deps/half-6570db6719926317.d: /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/lib.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/bfloat.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/bfloat/convert.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/binary16.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/binary16/convert.rs /home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/slice.rs
+
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/lib.rs:
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/bfloat.rs:
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/bfloat/convert.rs:
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/binary16.rs:
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/binary16/convert.rs:
+/home/ameli/.cargo/registry/src/index.crates.io-6f17d22bba15001f/half-1.8.3/src/slice.rs:
