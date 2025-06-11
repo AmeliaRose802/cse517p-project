@@ -58,8 +58,7 @@ class TransformerModelWrapper:
         # We will use the compiled model except when saving and loading
         self.model = CharacterTransformer(len(self.vocab)).to(self.device)
 
-        if hasattr(torch, 'compile'):
-            self.compiled_model = torch.compile(self.model)
+        
         
     def get_vocab_size(self):
         return len(self.vocab)
@@ -67,9 +66,6 @@ class TransformerModelWrapper:
     def load(self):
         
         self.model.load_state_dict(torch.load(self.model_file_path, map_location=self.device))
-
-        if hasattr(torch, 'compile'):
-            self.compiled_model = torch.compile(self.model)
        
     def embed_strings(self, inputs: list[str]):
 
@@ -121,6 +117,9 @@ class TransformerModelWrapper:
         # Enable TF32 precision on H200 for faster matrix multiplication
         torch.backends.cuda.matmul.allow_tf32 = True
         torch.backends.cudnn.allow_tf32 = True
+        
+        if hasattr(torch, 'compile'):
+            self.compiled_model = torch.compile(self.model)
         
         #Create the checkpoints folder if it doesn't exist
         if save_checkpoints:
