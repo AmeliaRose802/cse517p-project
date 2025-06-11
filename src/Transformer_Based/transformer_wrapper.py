@@ -18,7 +18,7 @@ from torch.optim.lr_scheduler import OneCycleLR
 
 
 class TransformerModelWrapper:
-    def __init__(self, device, work_directory, context_length = 32, use_existing_vocab=True, character_set="all"):
+    def __init__(self, device, work_directory, context_length = 32, use_existing_vocab=True, character_set="all", enable_timing=True):
         """
         Load in trained model and vocab
         
@@ -29,45 +29,104 @@ class TransformerModelWrapper:
             use_existing_vocab: Whether to use an existing vocabulary if available
             character_set: Character set(s) to use - can be a single set name, a list of set names, or "all"
                           Valid options: "latin", "romance", "germanic", "cyrillic", "cjk", "devanagari", "arabic", "all"
+            enable_timing: Whether to enable detailed timing measurements
         """
+        # Start overall initialization timing
+        init_start_time = time.time()
+        
         # The model's files will be saved and loaded from this directory
         self.work_directory = work_directory
         self.character_set = character_set
         self.context_length = context_length
+        self.enable_timing = enable_timing
+        self.timing_stats = {}  # Store timing statistics
 
         self.device = device
         self.model_file_name = "character_transformer.pt"
         self.model_file_path = os.path.join(work_directory, self.model_file_name)
         
         # Set up vocab
-        vocab_file_path = os.path.join(work_directory, "char_to_index.json")
+        vocab_start_time = time.time()
+        vocab_file_path = os.path.join(work_directory, "vocab_chars.csv")
 
         # If the vocab file already exists then we should load it in
         if os.path.exists(vocab_file_path) and use_existing_vocab:
             with open(vocab_file_path, "r", encoding="utf-8") as f:
-                self.vocab = json.load(f)
+                # Read characters from CSV file and build vocabulary dict
+                # Use rstrip instead of strip to preserve leading spaces
+                chars = []
+                for line in f:
+                    char = line.rstrip('\n\r')
+                    # Special handling for the space character
+                    if char == '' and len(chars) == 0:  # First line is empty
+                        char = ' '  # This is actually a space character
+                    chars.append(char)
+                
+                self.vocab = {char: idx for idx, char in enumerate(chars)}
+                
+                # Double-check the space character is properly included
+                if ' ' not in self.vocab:
+                    print(f"Warning: Space character not found in vocabulary after loading. Adding it manually.")
+                    self.vocab[' '] = 0  # Force space to be at index 0
         else:
-            self.vocab = init_vocab(vocab_file_path, character_set)
+            # Fall back to original method if CSV doesn't exist
+            #TODO: No longer have it write out in wrong format
+            json_vocab_path = os.path.join(work_directory, "char_to_index.json")
+            self.vocab = init_vocab(json_vocab_path, character_set)
+        
+        # Debug output to verify vocabulary loading
+        print(f"Vocabulary size: {len(self.vocab)}")
+        print(f"Space character in vocab: {' ' in self.vocab}, index: {self.vocab.get(' ', -1)}")
+        
+        vocab_end_time = time.time()
 
+        # Ensure we have a space character for padding
+        if ' ' not in self.vocab:
+            self.vocab[' '] = len(self.vocab)  # Add space at the end if not present
         self.PAD_TOKEN: Final = self.vocab[' ']
 
+        # Setup index to char mapping
+        index_char_start_time = time.time()
         self.index_to_char = np.array(list(self.vocab.keys()))
+        index_char_end_time = time.time()
 
         # Set up the model
-        # We need to hold onto both the compiled and non compiled models.
-        # We will use the compiled model except when saving and loading
+        model_init_start_time = time.time()
         self.model = CharacterTransformer(len(self.vocab)).to(self.device)
-
+        model_init_end_time = time.time()
         
+        # Store timing information
+        if self.enable_timing:
+            self.timing_stats["init"] = {
+                "total": time.time() - init_start_time,
+                "vocab_setup": vocab_end_time - vocab_start_time,
+                "index_to_char_setup": index_char_end_time - index_char_start_time,
+                "model_init": model_init_end_time - model_init_start_time
+            }
+            print(f"[TIMING] Initialization breakdown:")
+            print(f"  - Total init time: {self.timing_stats['init']['total']:.4f}s")
+            print(f"  - Vocab setup: {self.timing_stats['init']['vocab_setup']:.4f}s")
+            print(f"  - Index to char mapping: {self.timing_stats['init']['index_to_char_setup']:.4f}s")
+            print(f"  - Model initialization: {self.timing_stats['init']['model_init']:.4f}s")
         
     def get_vocab_size(self):
         return len(self.vocab)
     
     def load(self):
-        
+        if self.enable_timing:
+            load_start_time = time.time()
+            
         self.model.load_state_dict(torch.load(self.model_file_path, map_location=self.device))
+        
+        if self.enable_timing:
+            load_time = time.time() - load_start_time
+            self.timing_stats["model_load"] = load_time
+            print(f"[TIMING] Model loading took {load_time:.4f}s")
        
     def embed_strings(self, inputs: list[str]):
+        if self.enable_timing:
+            embed_start_time = time.time()
+            encode_start_time = time.time()
 
         encoded = np.full((len(inputs), self.context_length), 0, dtype=np.int32)
 
@@ -79,23 +138,72 @@ class TransformerModelWrapper:
 
             encoded[i] = indices
 
+        if self.enable_timing:
+            encode_end_time = time.time()
+            to_tensor_start_time = time.time()
+            
         # Convert once to torch tensor and move to GPU
-        return torch.from_numpy(encoded).to(self.device)
-
+        tensor_result = torch.from_numpy(encoded).to(self.device)
+        
+        if self.enable_timing:
+            to_tensor_end_time = time.time()
+            embed_end_time = time.time()
+            
+            self.timing_stats["embed_strings"] = {
+                "total": embed_end_time - embed_start_time,
+                "encoding": encode_end_time - encode_start_time,
+                "to_tensor_and_device": to_tensor_end_time - to_tensor_start_time
+            }
+            print(f"[TIMING] String embedding breakdown:")
+            print(f"  - Total embedding time: {self.timing_stats['embed_strings']['total']:.4f}s")
+            print(f"  - String encoding: {self.timing_stats['embed_strings']['encoding']:.4f}s")
+            print(f"  - Tensor conversion and device transfer: {self.timing_stats['embed_strings']['to_tensor_and_device']:.4f}s")
+            
+        return tensor_result
 
     def predict(self, input: list[str]):
+        if self.enable_timing:
+            predict_start_time = time.time()
+            
         self.model.eval()
+        
+        if self.enable_timing:
+            embed_start = time.time()
+            
         input_tensor = self.embed_strings(input)
+        
+        if self.enable_timing:
+            embed_end = time.time()
+            inference_start = time.time()
     
         with torch.no_grad():
             with torch.autocast(device_type=self.device.type, dtype=torch.float16):
-                #TODO: Compiled model is slower. Determine if this is still the case with larger models
                 logits = self.model(input_tensor)
 
                 logits[:, self.PAD_TOKEN] = float('-inf')
                 top3 = torch.topk(logits, k=3, dim=1).indices.cpu().tolist()
 
+                if self.enable_timing:
+                    inference_end = time.time()
+                    postprocess_start = time.time()
+                    
                 res = ["".join(self.index_to_char[j] for j in row) for row in top3]
+                
+                if self.enable_timing:
+                    postprocess_end = time.time()
+                    predict_end_time = time.time()
+                    
+                    self.timing_stats["predict"] = {
+                        "total": predict_end_time - predict_start_time,
+                        "embedding": embed_end - embed_start,
+                        "inference": inference_end - inference_start,
+                        "postprocessing": postprocess_end - postprocess_start
+                    }
+                    print(f"[TIMING] Prediction breakdown (batch size: {len(input)}):")
+                    print(f"  - Total prediction time: {self.timing_stats['predict']['total']:.4f}s")
+                    print(f"  - Embedding time: {self.timing_stats['predict']['embedding']:.4f}s")
+                    print(f"  - Inference time: {self.timing_stats['predict']['inference']:.4f}s")
+                    print(f"  - Postprocessing time: {self.timing_stats['predict']['postprocessing']:.4f}s")
         
         return res
     
