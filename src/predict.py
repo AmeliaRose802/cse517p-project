@@ -22,58 +22,28 @@ if __name__ == '__main__':
 
     if args.time:
         start_time = time.time()
-        
-    # Timing model loading
-    if args.time:
-        load_start = time.time()
-        
-    model = TransformerModelWrapper(device, args.work_dir, enable_timing=args.time)
-    model.load()
+
+    model = TransformerModelWrapper(device, args.work_dir)
+
     
-    if args.time:
-        load_end = time.time()
-        print(f"Loading model took {load_end - load_start:.2f}s")
+    model.load()
     
     test_data_file = args.test_data
     output_file = args.test_output
 
-    # Timing data loading
-    if args.time:
-        data_load_start = time.time()
-        
     test_input = load_test_input(test_data_file)
-    
-    if args.time:
-        data_load_end = time.time()
-        print(f"Loading test data took {data_load_end - data_load_start:.2f}s")
 
     #TODO: Tune batch size on their machine for best perf
     # batch_size = 50000
 
-    # Timing prediction
-    if args.time:
-        predict_start = time.time()
-        
     preds = model.predict(test_input)
-    
-    if args.time:
-        predict_end = time.time()
-        print(f"Model prediction took {predict_end - predict_start:.2f}s")
 
     # preds = []
     # for i in range(0, len(test_input), batch_size):
     #     batch = test_input[i:i + batch_size]
     #     preds.extend(model.predict(batch))
 
-    # Timing writing predictions
-    if args.time:
-        write_start = time.time()
-        
     write_pred(preds, output_file)
-    
-    if args.time:
-        write_end = time.time()
-        print(f"Writing predictions took {write_end - write_start:.2f}s")
 
     if args.time:
         end_time = time.time()
