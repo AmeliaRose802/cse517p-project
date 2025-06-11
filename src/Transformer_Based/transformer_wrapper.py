@@ -127,7 +127,7 @@ class TransformerModelWrapper:
             os.makedirs(os.path.join(self.work_directory, "checkpoints"), exist_ok=True)
             self.model_checkpoint_path = f"{self.work_directory}/checkpoints/{self.model_file_name}"
 
-        num_workers = min(16, multiprocessing.cpu_count()) 
+        num_workers =  multiprocessing.cpu_count()
         persistent_workers = num_workers > 0
         
         train_loader = DataLoader(
